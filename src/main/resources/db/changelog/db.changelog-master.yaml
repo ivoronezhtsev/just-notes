@@ -1,13 +1,18 @@
 databaseChangeLog:
   - changeSet:
       id: create_users_table
-      author: your_name
+      author: Voronezhtsev Igor
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: users
       changes:
         - createTable:
             tableName: users
             columns:
               - column:
-                  name: user_id
+                  name: id
                   type: INT
                   autoIncrement: true
                   constraints:
@@ -34,7 +39,12 @@ databaseChangeLog:
 
   - changeSet:
       id: create_notes_table
-      author: your_name
+      author: Voronezhtsev Igor
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: notes
       changes:
         - createTable:
             tableName: notes
@@ -49,9 +59,7 @@ databaseChangeLog:
                   name: user_id
                   type: INT
                   constraints:
-                    references:
-                      tableName: Users
-                      columnName: user_id
+                    nullable: false
               - column:
                   name: title
                   type: VARCHAR(255)
@@ -64,3 +72,31 @@ databaseChangeLog:
               - column:
                   name: updated_at
                   type: TIMESTAMP
+        - addForeignKeyConstraint:
+            baseTableName: notes
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_notes_user
+
+  - changeSet:
+      id: insert_root
+      author: Voronezhtsev Igor
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: select count(*) from users where username='root'
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: 'root'
+              - column:
+                  name: password
+                  value: '$2a$11$5.FZoJDs969.XtEu6UdoH.YqdyuqhrS1iUU5CVbEDBYDiV/G1lVYG'
+              - column:
+                  name: email
+                  value: 'root@mail.org'
