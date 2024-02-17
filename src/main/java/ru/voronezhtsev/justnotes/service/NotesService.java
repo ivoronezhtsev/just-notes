@@ -33,4 +33,8 @@ public class NotesService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return (AppUserPrincipal) authentication.getPrincipal();
     }
+
+    public void delete(long noteId) {
+        notesRepository.deleteById(noteId);
+    }
 }

@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import ru.voronezhtsev.justnotes.entity.Note;
 import ru.voronezhtsev.justnotes.service.NotesService;
 
@@ -34,4 +36,12 @@ public class NotesController {
         notesService.save(noteModel);
         return "redirect:/";
     }
+
+    @PostMapping("/delete/{noteId}")
+    public String delete(@PathVariable Long noteId) {
+        notesService.delete(noteId);
+        return "redirect:/";
+    }
+
+
 }
