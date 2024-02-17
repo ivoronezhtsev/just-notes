@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Add New Note</title>
+</head>
+    <body>
+        <h2>Note Info:</h2>
+        <br>
+        <form th:object="${note}" th:action="save">
+            Title : <input th:field="*{title}"/>
+            <br><br>
+            Content: <input th:field="*{content}"/>
+            <br><br>
+            <input type="hidden" th:value="${name}">
+            <input type="submit" value="Ok">
+        </form>
+    </body>
+</html>
