@@ -23,4 +23,8 @@ public class User {
     LocalDateTime registrationDate;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<Note> notes;
+
+    public User(long id) {
+        this.id = id;
+    }
 }

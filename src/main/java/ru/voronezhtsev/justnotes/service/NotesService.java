@@ -19,16 +19,14 @@ import java.util.List;
 public class NotesService {
 
     private final NotesRepository notesRepository;
-    private final UsersRepository usersRepository;
 
     public List<Note> findNotes() {
         return notesRepository.findByUserId(getCurrentUser().getUserId());
     }
 
     public void save(NoteModel noteModel) {
-        User user = usersRepository.findByUsername(getCurrentUser().getUsername());
-        Note note = new Note(user, noteModel.getTitle(), noteModel.getContent());
-        notesRepository.save(note); //todo Попробовать убрать получение пользователя.
+        Note note = new Note(new User(getCurrentUser().getUserId()), noteModel.getTitle(), noteModel.getContent());
+        notesRepository.save(note);
     }
 
     private AppUserPrincipal getCurrentUser() {
