@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import ru.voronezhtsev.justnotes.entity.Note;
 import ru.voronezhtsev.justnotes.service.NotesService;
 
@@ -22,4 +23,15 @@ public class NotesController {
         return "index";
     }
 
+    @GetMapping("/add")
+    public String add(Model model) {
+        model.addAttribute("note", new NoteModel());
+        return "note-info";
+    }
+
+    @GetMapping("save")
+    public String save(@ModelAttribute NoteModel noteModel) {
+        notesService.save(noteModel);
+        return "redirect:/";
+    }
 }

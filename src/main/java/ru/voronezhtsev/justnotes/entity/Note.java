@@ -31,7 +31,8 @@ public class Note {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Note(String title, String content) {
+    public Note(User user, String title, String content) {
+        this.user = user;
         this.title = title;
         this.content = content;
         this.createdAt = LocalDateTime.now();
