@@ -43,5 +43,4 @@ public class NotesController {
         return "redirect:/";
     }
 
-
 }
