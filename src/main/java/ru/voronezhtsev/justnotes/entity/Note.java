@@ -38,5 +38,4 @@ public class Note {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
-
 }
