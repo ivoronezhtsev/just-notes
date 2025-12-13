@@ -13,6 +13,7 @@
         <th>Содержание</th>
         <th>Дата создания</th>
         <th>Дата обновления</th>
+        <th>Действие</th>
     </tr>
     </thead>
     <tbody>
@@ -21,6 +22,7 @@
         <td th:text="${note.content}"></td>
         <td th:text="${note.createdAt}"></td>
         <td th:text="${note.updatedAt}"></td>
+        <td><input type="button" value="Delete" th:onclick="|window.location.href='@{/delete/{id}(id=${note.id})}'|"></td>
     </tr>
     </tbody>
 </table>
