@@ -12,17 +12,17 @@ services:
       - pg_data:/var/lib/postgresql
     restart: always
 
-  #pgadmin:
-#    image: dpage/pgadmin4
-#    container_name: pgadmin_ui
-#    environment:
-#      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-#      PGADMIN_DEFAULT_PASSWORD: admin
-#    ports:
-#      - "8090:80"
-#    depends_on:
-#      - db
-#    restart: always
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_ui
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8090:80"
+    depends_on:
+      - db
+    restart: always
 
 volumes:
   pg_data:
